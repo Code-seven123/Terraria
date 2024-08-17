@@ -10,12 +10,17 @@ RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     nodejs \
-    npm
+    npm \
+    mono-complete \
+    dos2unix
 
 # Install Terraria server
 RUN wget https://terraria.org/api/download/pc-dedicated-server/terraria-server-1444.zip -O terraria-server.zip \
     && unzip terraria-server.zip -d /app/terraria-server \
     && rm terraria-server.zip
+
+# Give execution permission to the Terraria server executable
+RUN chmod +x /app/terraria-server/1444/Linux/TerrariaServer.bin.x86_64
 
 # Expose Terraria server port
 EXPOSE 7777
@@ -56,4 +61,4 @@ RUN mkdir -p /app/upload
 EXPOSE 3000
 
 # Start both Terraria server and Node.js file management server
-CMD ./terraria-server/1444/Linux/TerrariaServer.bin.x86_64 & node server.js
+CMD mono /app/terraria-server/1444/Linux/TerrariaServer.bin.x86_64 & node server.js
