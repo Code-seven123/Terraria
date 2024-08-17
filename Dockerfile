@@ -61,4 +61,4 @@ RUN mkdir -p /app/upload
 EXPOSE 3000
 
 # Start both Terraria server and Node.js file management server
-CMD mono /app/terraria-server/1444/Linux/TerrariaServer.bin.x86_64 & node server.js
+CMD /app/terraria-server/1444/Linux/TerrariaServer.bin.x86_64 & node server.js
